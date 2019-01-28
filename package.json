@@ -1,0 +1,23 @@
+{
+  "name": "slackbotwork",
+  "version": "1.0.0",
+  "description": "SlackBot that helps you choose a meal",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cgarcia101015/slackbotwork.git"
+  },
+  "author": "Carlos M Garcia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cgarcia101015/slackbotwork/issues"
+  },
+  "homepage": "https://github.com/cgarcia101015/slackbotwork#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "slackbots": "^1.2.0"
+  }
+}
