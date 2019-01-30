@@ -1,14 +1,14 @@
+require("dotenv").config();
+
+
 const Slackbot = require('slackbots');
 const axios = require('axios');
 var express = require('express');
 var app = express();
-require("dotenv").config();
-var slackbot = new Slackbot(keys.slackbot);
-// const bot = new Slackbot({
-//     // token: 'xoxb-535280373492-535338113139-KvpwIrBjx2j3NW4o82IA5oYR',
-//     // token: 'xoxb-535280373492-535338113139-64TBIBHywQeSxeej66FdnD1B',
-//     name: 'mealbot'
-// });
+const bot = new Slackbot({
+    token: process.env.SLACKBOT_TOKEN,
+    name: 'mealbot'
+});
 
 // Start Handler
 bot.on('start', () => {

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/cgarcia101015/slackbotwork#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "slackbots": "^1.2.0"
   }
