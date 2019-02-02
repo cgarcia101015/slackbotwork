@@ -1,13 +1,24 @@
 require("dotenv").config();
-
+var keys = require('./keys.js');
 SlackBot = require("slackbots");
 axios = require("axios");
 
+console.log('these are the keys');
+console.log(keys.zomato);
 // Setup our slackbot with the app we created and their credentials
 var bot = new SlackBot({
     token: process.env.SLACKBOT_TOKEN,
     name: "work_meal"
 });
+
+var zamKey = keys.zomato;
+var edaKey = keys.edamam;
+var firKey = keys.firebase;
+
+
+// var zomKey = process.env.ZOMATO_KEY;
+
+// var edaKey = process.env.EDAMAN_KEY;
 
 // Error Handler
 bot.on("error", function (error) {
@@ -48,8 +59,8 @@ bot.on("message", function (data) {
     }
 
     function returnRestaurant() {
-        var config = { headers: { "user-key": "5d210cce31ec0d89636072c424a81717" } };
-        var URL = "https://developers.zomato.com/api/v2.1/search?q=" + userInput;
+        var config = { headers: { "user-key": zamKey } };
+        var URL = "https://developers.zomato.com/api/v2.1/search?q=" + userInput + "&lat=40.809498&lon=-73.960154&radius=500%&sort=real_distance";
 
         axios.get(URL, config).then(function (response) {
             var jsonData = response.data;
@@ -58,18 +69,22 @@ bot.on("message", function (data) {
                 "Location: " + jsonData.restaurants[1].restaurant.location.address,
                 "Url to Restaurant: " + jsonData.restaurants[1].restaurant.url,
             ].join("\n\n");
+            // console.log(response);
+            // console.log(zomato);
             var params = {
                 icon_emoji: ":bread:"
             };
             bot.postMessageToChannel("slack-bot-for-meals", "Here\'s an idea: " + showData, params);
         }).catch(function (error) {
-            console.log("Edamam API error: " + error);
+            console.log("Zomato API error: " + error);
             bot.postMessageToChannel("slack-bot-for-meals", "I\'m sorry, I didn\'t get any results for that, could you be more specific?", { "slackbot": true, icon_emoji: ":question:" });
         });
     };
+
+
     // Return a recipe 
     function returnLunch() {
-        axios.get("https://api.edamam.com/search?q=" + apiInput + "&app_id=45d6973d&app_key=a104dcac382786daa58cb39db2166cb2").then(function (response) {
+        axios.get("https://api.edamam.com/search?q=" + apiInput + "&app_id=45d6973d&app_key=" + edaKey).then(function (response) {
             var jsonData = response.data;
 
             var showData = [
