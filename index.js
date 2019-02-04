@@ -13,6 +13,7 @@ var bot = new SlackBot({
 var zamKey = keys.zomato;
 var edaKey = keys.edamam;
 var firKey = keys.firebase;
+var mapKey = keys.mapquest;
 
 // Error Handler
 bot.on('error', function(error) {
@@ -63,7 +64,7 @@ bot.on('message', function(data) {
 
 			// Optional depending on the providers
 			httpAdapter: 'https', // Default
-			apiKey: 'B4JrLqy7Tg3efG2mqQJDfiiOG1hnI9h0', // for Mapquest, OpenCage, Google Premier
+			apiKey: mapKey, // for Mapquest, OpenCage, Google Premier
 			formatter: null // 'gpx', 'string', ...
 		};
 		var geocoder = NodeGeocoder(options);
@@ -82,7 +83,7 @@ bot.on('message', function(data) {
 		var URL =
 			'https://developers.zomato.com/api/v2.1/search?q=' +
 			userInput +
-			'&lat=40.809498&lon=-73.960154&radius=500%&sort=real_distance';
+			'&lat=40.874901&lon=-73.870219&radius=100%&sort=real_distance';
 
 		axios
 			.get(URL, config)
